@@ -42,7 +42,6 @@ tmpFile=/tmp/NotifyBySMS.last   # kind of a lock file
 if test -w $tmpFile ; then
 	lastSMS=`head -n 1 $tmpFile`
 	current=`date +%s`
-	intervalle=$(($current - $lastSMS))
 	if test $(($current - $lastSMS)) -gt $delay ; then
 		retour=`wget -q -O - "$urlCGI?smsAccount=$idCompte&login=$login&password=$passwd&from=$from&to=$to&contentType=$contentType&message=$message" | cat`
 		date +%s > $tmpFile
